@@ -5,6 +5,6 @@ namespace Communicators.Abstractions
     {
         public void Send(byte[] infoToSend);
 
-        public byte[] Receive();
+        public byte[] Receive(int size);
     }
 }
