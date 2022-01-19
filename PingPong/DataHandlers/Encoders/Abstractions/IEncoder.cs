@@ -1,6 +1,4 @@
 ﻿
-using System;
-
 namespace DataHandlers.Encoders.Abstractions
 {
     public interface IEncoder<T>
