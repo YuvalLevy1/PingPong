@@ -3,7 +3,7 @@ using System;
 
 namespace DataHandlers.Decoders
 {
-    class StringDecoder : IDecoder<string>
+    public class StringDecoder : IDecoder<string>
     {
         public string Decode(byte[] info)
         {
