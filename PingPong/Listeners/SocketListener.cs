@@ -21,5 +21,10 @@ namespace Listeners
             var socket = _listener.Accept();
             return new SocketCommunicator(socket);
         }
+
+        public void Close()
+        {
+            _listener.Close();
+        }
     }
 }
