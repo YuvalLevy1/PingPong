@@ -1,21 +1,32 @@
-﻿using Communicators.Abstractions;
+﻿using ClientHandelingStrategies.Abstractions;
+using Communicators.Abstractions;
+using DataHandlers.Decoders.Abstractions;
+using DataHandlers.Encoders.Abstractions;
 using Listeners.Abstractions;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Server
 {
-    public class Server
+    public class Server<T>
     {
-        private IListener _listener;
         private bool _running;
-        private List<ICommunicator> clients;
+        private readonly IListener _listener;
+        private readonly IClientHandelingStrategy<T> _strategy;
+        private List<ICommunicator> _clients;
+        private IEncoder<T> _encoder;
+        private IDecoder<T> _decoder;
 
-        public Server(IListener listener)
+        public Server(IListener listener, IClientHandelingStrategy<T> strategy, IEncoder<T> encoder, IDecoder<T> decoder)
         {
             _listener = listener;
+            _strategy = strategy;
+            _encoder = encoder;
+            _decoder = decoder;
             _running = false;
+            _clients = new List<ICommunicator>();
         }
-        
+
         private ICommunicator Listen()
         {
             return _listener.Listen();
@@ -23,14 +34,19 @@ namespace Server
 
         public void Start()
         {
-
+            while (_running)
+            {
+                var client = Listen();
+                Task.Run(() => _strategy.Run(client, _encoder, _decoder));
+                _clients.Add(client);
+            }
         }
 
         public void Close()
         {
             _listener.Close();
             _running = false;
-            foreach (var client in clients)
+            foreach (var client in _clients)
             {
                 client.Close();
             }
