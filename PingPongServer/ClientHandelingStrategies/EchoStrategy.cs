@@ -1,5 +1,4 @@
 ﻿using ClientHandelingStrategies.Abstractions;
-using Communicators.Abstractions;
 using Communicators.ProtocolEnforcers.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
@@ -19,17 +18,12 @@ namespace ClientHandelingStrategies
                 {
                     data = decoder.Decode(client.Receive());
                     Console.WriteLine($"received data:{data}");
-                    if (data.Equals("end"))
-                    {
-                        client.Close();
-                        clients.Remove(client);
-                        break;
-                    }
                     client.Send(encoder.Encode(data));
                     data = string.Empty;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     clients.Remove(client);
                     client.Close();
                     break;

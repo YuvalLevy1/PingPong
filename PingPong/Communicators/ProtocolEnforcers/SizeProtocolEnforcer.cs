@@ -30,7 +30,6 @@ namespace Communicators.ProtocolEnforcers
 
         public override void Close()
         {
-            Send(_encoder.Encode("end"));
             _communicator.Close();
         }
 
@@ -40,6 +39,7 @@ namespace Communicators.ProtocolEnforcers
             byte[] bufferLength = new byte[_sizeOfLength];
             byte[] buffer = new byte[_sizeOfBuffer];
             var dataLength = _communicator.Receive(bufferLength);
+            System.Console.WriteLine(_decoder.Decode(bufferLength.Take(dataLength).ToArray()));
             var length = int.Parse(_decoder.Decode(bufferLength.Take(dataLength).ToArray()));
             while (data.Count < length)
             {
@@ -52,7 +52,13 @@ namespace Communicators.ProtocolEnforcers
         public override void Send(byte[] info)
         {
             byte[][] slicedInfo = ArraySlicer(info, _sizeOfBuffer);
-            _communicator.Send(_encoder.Encode($"{info.Length}"));
+            byte[] infoLength = new byte[_sizeOfLength];
+            byte[] encodedLength = _encoder.Encode($"{info.Length}");
+            for (int i = 0; i < encodedLength.Length; i++)
+            {
+                infoLength[i] = encodedLength[i];
+            }
+            _communicator.Send(infoLength);
             for (int i = 0; i < slicedInfo.Length; i++)
             {
                 _communicator.Send(slicedInfo[i]);

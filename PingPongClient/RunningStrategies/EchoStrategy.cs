@@ -28,8 +28,9 @@ namespace RunningStrategies
                     Console.WriteLine($"received data:{data}");
                     
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e);
                     server.Close();
                     break;
                 }
