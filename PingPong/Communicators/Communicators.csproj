@@ -8,4 +8,10 @@
     <ProjectReference Include="..\DataHandlers\DataHandlers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Protocols.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

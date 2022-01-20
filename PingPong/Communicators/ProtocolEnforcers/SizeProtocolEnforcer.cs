@@ -12,20 +12,33 @@ namespace Communicators.ProtocolEnforcers
 {
     class SizeProtocolEnforcer : ProtocolEnforcer
     {
-        public SizeProtocolEnforcer(ICommunicator communicator, IEncoder<string> encoder, IDecoder<string> decoder)
-            : base(communicator, encoder, decoder)
-        {
+        private readonly IEncoder<string> _encoder;
+        private readonly IDecoder<string> _decoder;
+        private readonly int _sizeOfLength;
+        private readonly int _sizeOfBuffer;
 
+        public SizeProtocolEnforcer(
+            ICommunicator communicator,
+            IEncoder<string> encoder,
+            IDecoder<string> decoder,
+            int sizeOfLength,
+            int sizeOfBuffer)
+            : base(communicator)
+        {
+            _encoder = encoder;
+            _decoder = decoder;
+            _sizeOfLength = sizeOfLength;
+            _sizeOfBuffer = sizeOfBuffer;
         }
 
         public override byte[] Receive()
         {
             List<byte> data = new List<byte>();
             byte[] buffer;
-            var length = int.Parse(_decoder.Decode(_communicator.Receive(4)));
+            var length = int.Parse(_decoder.Decode(_communicator.Receive(_sizeOfLength)));
             while (data.Count < length)
             {
-                buffer = _communicator.Receive(1024);
+                buffer = _communicator.Receive(_sizeOfBuffer);
                 data.AddRange(buffer);
             }
             return data.ToArray();
@@ -33,7 +46,7 @@ namespace Communicators.ProtocolEnforcers
 
         public override void Send(byte[] info)
         {
-            byte[][] slicedInfo = ArraySlicer(info, 1024);
+            byte[][] slicedInfo = ArraySlicer(info, _sizeOfBuffer);
             _communicator.Send(_encoder.Encode($"{info.Length}"));
             for (int i = 0; i < slicedInfo.Length; i++)
             {
