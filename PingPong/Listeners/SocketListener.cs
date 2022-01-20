@@ -30,7 +30,7 @@ namespace Listeners
             _sizeOfLength = sizeOfLength;
         }
 
-        public ProtocolEnforcer Listen()
+        public IProtocolEnforcer Listen()
         {
             _listener.Listen();
             var socket = _listener.Accept();
