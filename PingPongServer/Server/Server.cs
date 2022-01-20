@@ -3,8 +3,8 @@ using Communicators.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
 using Listeners.Abstractions;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using Utils;
 
 namespace Server
 {
@@ -13,7 +13,7 @@ namespace Server
         private bool _running;
         private readonly IListener _listener;
         private readonly IClientHandelingStrategy<T> _strategy;
-        private List<ICommunicator> _clients;
+        private ConcurrentHashSet<ICommunicator> _clients;
         private IEncoder<T> _encoder;
         private IDecoder<T> _decoder;
 
@@ -24,7 +24,7 @@ namespace Server
             _encoder = encoder;
             _decoder = decoder;
             _running = false;
-            _clients = new List<ICommunicator>();
+            _clients = new ConcurrentHashSet<ICommunicator>();
         }
 
         private ICommunicator Listen()
@@ -37,7 +37,7 @@ namespace Server
             while (_running)
             {
                 var client = Listen();
-                _clients.Add(client);
+                _clients.TryAdd(client);
                 Task.Run(() => _strategy.Run(client, _clients, _encoder, _decoder));
             }
         }
