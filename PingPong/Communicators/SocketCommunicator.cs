@@ -14,11 +14,9 @@ namespace Communicators
             _socket = socket;
         }
 
-        public byte[] Receive(int size)
+        public int Receive(byte[] buffer)
         {
-            byte[] buffer = new byte[size];
-            _socket.Receive(buffer);
-            return buffer;
+            return _socket.Receive(buffer);
         }
 
         public void Send(byte[] infoToSend)

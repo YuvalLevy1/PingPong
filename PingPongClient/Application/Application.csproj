@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -6,14 +6,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Client\Client.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Communicators">
       <HintPath>..\..\PingPong\Communicators\bin\Debug\net5.0\Communicators.dll</HintPath>
+    </Reference>
+    <Reference Include="Connectors">
+      <HintPath>..\..\PingPong\Connectors\bin\Debug\net5.0\Connectors.dll</HintPath>
     </Reference>
     <Reference Include="DataHandlers">
       <HintPath>..\..\PingPong\DataHandlers\bin\Debug\net5.0\DataHandlers.dll</HintPath>
     </Reference>
     <Reference Include="Listeners">
       <HintPath>..\..\PingPong\Listeners\bin\Debug\net5.0\Listeners.dll</HintPath>
+    </Reference>
+    <Reference Include="ProtocolEnforcerFactories">
+      <HintPath>..\..\PingPong\ProtocolEnforcerFactories\bin\Debug\net5.0\ProtocolEnforcerFactories.dll</HintPath>
     </Reference>
     <Reference Include="Utils">
       <HintPath>..\..\PingPong\Utils\bin\Debug\net5.0\Utils.dll</HintPath>

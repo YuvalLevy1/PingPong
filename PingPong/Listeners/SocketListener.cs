@@ -17,7 +17,7 @@ namespace Listeners
 
         public SocketListener(int port, IProtocolEnforcerFactory factory)
         {
-            var ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
+            var ip = IPAddress.Parse("192.168.56.1");
             var localEndpoint = new IPEndPoint(ip, port);
             _listener = new Socket(localEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _listener.Bind(localEndpoint);

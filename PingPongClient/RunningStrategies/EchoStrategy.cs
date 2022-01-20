@@ -18,16 +18,15 @@ namespace RunningStrategies
                     Console.WriteLine("enter string to echo: ");
                     data = Console.ReadLine();
                     server.Send(encoder.Encode(data));
-
-                    data = decoder.Decode(server.Receive());
-                    Console.WriteLine($"received data:{data}");
                     if (data.Equals("end"))
                     {
                         Console.WriteLine("");
                         server.Close();
                         break;
                     }
-                    server.Send(encoder.Encode(data));
+                    data = decoder.Decode(server.Receive());
+                    Console.WriteLine($"received data:{data}");
+                    
                 }
                 catch (Exception)
                 {

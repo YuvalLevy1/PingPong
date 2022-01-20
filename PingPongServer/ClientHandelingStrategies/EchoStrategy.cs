@@ -26,6 +26,7 @@ namespace ClientHandelingStrategies
                         break;
                     }
                     client.Send(encoder.Encode(data));
+                    data = string.Empty;
                 }
                 catch (Exception)
                 {

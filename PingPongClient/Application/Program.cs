@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System.Net;
 
 namespace Application
 {
@@ -6,7 +7,9 @@ namespace Application
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            EchoClientBootstrapper bootstrapper = new EchoClientBootstrapper();
+            var client = bootstrapper.GetClient();
+            client.Start(IPAddress.Parse("192.168.56.1"), 7070);
         }
     }
 }

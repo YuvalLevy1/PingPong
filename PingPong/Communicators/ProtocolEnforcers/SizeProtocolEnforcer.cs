@@ -37,12 +37,14 @@ namespace Communicators.ProtocolEnforcers
         public override byte[] Receive()
         {
             List<byte> data = new List<byte>();
-            byte[] buffer;
-            var length = int.Parse(_decoder.Decode(_communicator.Receive(_sizeOfLength)));
+            byte[] bufferLength = new byte[_sizeOfLength];
+            byte[] buffer = new byte[_sizeOfBuffer];
+            var dataLength = _communicator.Receive(bufferLength);
+            var length = int.Parse(_decoder.Decode(bufferLength.Take(dataLength).ToArray()));
             while (data.Count < length)
             {
-                buffer = _communicator.Receive(_sizeOfBuffer);
-                data.AddRange(buffer);
+                dataLength = _communicator.Receive(buffer);
+                data.AddRange(buffer.Take(dataLength));
             }
             return data.ToArray();
         }
@@ -59,7 +61,7 @@ namespace Communicators.ProtocolEnforcers
 
         private byte[][] ArraySlicer(byte[] info, int sizeOfPacket)
         {
-            byte[][] slicedInfo = new byte[info.Length / sizeOfPacket][];
+            byte[][] slicedInfo = new byte[info.Length / sizeOfPacket + 1][];
             for (int i = 0; i < slicedInfo.Length; i++)
             {
                 var buffer = info.Take(sizeOfPacket).ToArray();
