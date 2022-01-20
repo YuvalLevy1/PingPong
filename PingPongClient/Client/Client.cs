@@ -15,7 +15,7 @@ namespace Server
         private readonly IEncoder<T> _encoder;
         private readonly IDecoder<T> _decoder;
         private readonly IProtocolEnforcerFactory _factory;
-        private readonly IRunningStrategy<T> strategy;
+        private readonly IRunningStrategy<T> _strategy;
         private IProtocolEnforcer _server;
 
         public Client(
@@ -29,7 +29,7 @@ namespace Server
             _encoder = encoder;
             _decoder = decoder;
             _factory = factory;
-            this.strategy = strategy;
+            _strategy = strategy;
             _running = false;
         }
         
@@ -37,7 +37,7 @@ namespace Server
         {
             _running = true;
             Connect(address, port);
-            strategy.Run(_server, _encoder, _decoder);
+            _strategy.Run(_server, _encoder, _decoder);
         }
 
         private void Connect(IPAddress address, int port)
