@@ -40,6 +40,7 @@ namespace Server
 
         public void Start()
         {
+            _running = true;
             while (_running)
             {
                 var client = Listen();
