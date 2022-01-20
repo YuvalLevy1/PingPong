@@ -1,18 +1,21 @@
 ﻿using Communicators;
 using Communicators.Abstractions;
 using Listeners.Abstractions;
-using System;
+using System.Net;
 using System.Net.Sockets;
 
 namespace Listeners
 {
-    class SocketListener : IListener
+    public class SocketListener : IListener
     {
         private Socket _listener;
 
-        public SocketListener(Socket listener)
+        public SocketListener(int port)
         {
-            _listener = listener;
+            var ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList[0];
+            var localEndpoint = new IPEndPoint(ip, port);
+            _listener = new Socket(localEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            _listener.Bind(localEndpoint);
         }
 
         public ICommunicator Listen()

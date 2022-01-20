@@ -7,7 +7,7 @@ using Utils;
 
 namespace ClientHandelingStrategies
 {
-    class EchoStrategy : IClientHandelingStrategy<string>
+    public class EchoStrategy : IClientHandelingStrategy<string>
     {
         public void Run(ICommunicator client, ConcurrentHashSet<ICommunicator> clients, IEncoder<string> encoder, IDecoder<string> decoder)
         {
