@@ -3,12 +3,14 @@ using Communicators.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ClientHandelingStrategies
 {
     class EchoStrategy : IClientHandelingStrategy<string>
     {
-        public void Run(ICommunicator client, IEncoder<string> encoder, IDecoder<string> decoder)
+        public void Run(ICommunicator client, ICollection<ICommunicator> clients, IEncoder<string> encoder, IDecoder<string> decoder)
         {
             string data;
             byte[] encodedData;
@@ -21,6 +23,7 @@ namespace ClientHandelingStrategies
                 {
                     client.Send(encoder.Encode("end"));
                     client.Close();
+                    clients.Remove(client);
                     break;
                 }
                 encodedData = encoder.Encode(data);

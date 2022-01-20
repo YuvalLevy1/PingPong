@@ -37,8 +37,8 @@ namespace Server
             while (_running)
             {
                 var client = Listen();
-                Task.Run(() => _strategy.Run(client, _encoder, _decoder));
                 _clients.Add(client);
+                Task.Run(() => _strategy.Run(client, _clients, _encoder, _decoder));
             }
         }
 
