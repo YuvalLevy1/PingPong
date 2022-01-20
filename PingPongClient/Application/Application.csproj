@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="Communicators">
+      <HintPath>..\..\PingPong\Communicators\bin\Debug\net5.0\Communicators.dll</HintPath>
+    </Reference>
+    <Reference Include="DataHandlers">
+      <HintPath>..\..\PingPong\DataHandlers\bin\Debug\net5.0\DataHandlers.dll</HintPath>
+    </Reference>
+    <Reference Include="Listeners">
+      <HintPath>..\..\PingPong\Listeners\bin\Debug\net5.0\Listeners.dll</HintPath>
+    </Reference>
+    <Reference Include="Utils">
+      <HintPath>..\..\PingPong\Utils\bin\Debug\net5.0\Utils.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
