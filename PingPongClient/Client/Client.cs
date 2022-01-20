@@ -1,4 +1,4 @@
-﻿using Communicators.Abstractions;
+﻿using Communicators.ProtocolEnforcers.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
 
@@ -7,11 +7,11 @@ namespace Server
     public class Client<T>
     {
         private bool _running;
-        private readonly ICommunicator _communicator;
+        private readonly IProtocolEnforcer _communicator;
         private IEncoder<T> _encoder;
         private IDecoder<T> _decoder;
 
-        public Client(ICommunicator communicator, IEncoder<T> encoder, IDecoder<T> decoder)
+        public Client(IProtocolEnforcer communicator, IEncoder<T> encoder, IDecoder<T> decoder)
         {
             _communicator = communicator;
             _encoder = encoder;
