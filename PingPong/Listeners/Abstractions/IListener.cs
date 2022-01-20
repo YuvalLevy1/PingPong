@@ -4,7 +4,7 @@ namespace Listeners.Abstractions
 {
     public interface IListener
     {
-        public ProtocolEnforcer Listen();
+        public IProtocolEnforcer Listen();
 
         public void Close();
     }
