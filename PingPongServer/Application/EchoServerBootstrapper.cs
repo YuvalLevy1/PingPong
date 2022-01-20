@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Net;
+using DataHandlers.Decoders;
+using DataHandlers.Encoders;
 
 namespace Application
 {
@@ -17,6 +19,9 @@ namespace Application
         {
             var listener = new SocketListener(port);
             var serverStrategy = new EchoStrategy();
+            var decoder = new StringDecoder();
+            var encoder = new StringEncoder();
+            return new Server<string>(listener, serverStrategy, encoder, decoder);
         }
     }
 }

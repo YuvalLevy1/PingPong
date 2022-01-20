@@ -6,7 +6,8 @@ namespace Application
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var server = new EchoServerBootstrapper().GetServer(int.Parse(args[0]));
+            server.Start();
         }
     }
 }

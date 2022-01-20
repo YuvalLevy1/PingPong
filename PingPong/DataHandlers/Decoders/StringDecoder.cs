@@ -1,5 +1,4 @@
 ﻿using DataHandlers.Decoders.Abstractions;
-using System;
 
 namespace DataHandlers.Decoders
 {
