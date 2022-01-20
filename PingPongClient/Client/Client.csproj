@@ -5,8 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\RunningStrategies\RunningStrategies.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="Communicators">
       <HintPath>..\..\PingPong\Communicators\bin\Debug\net5.0\Communicators.dll</HintPath>
+    </Reference>
+    <Reference Include="Connectors">
+      <HintPath>..\..\PingPong\Connectors\bin\Debug\net5.0\Connectors.dll</HintPath>
     </Reference>
     <Reference Include="DataHandlers">
       <HintPath>..\..\PingPong\DataHandlers\bin\Debug\net5.0\DataHandlers.dll</HintPath>

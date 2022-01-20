@@ -12,7 +12,7 @@ namespace RunningStrategies
 {
     public class EchoStrategy : IRunningStrategy<string>
     {
-        public void Run(IProtocolEnforcer client, IEncoder<string> encoder, IDecoder<string> decoder)
+        public void Run(IProtocolEnforcer server, IEncoder<string> encoder, IDecoder<string> decoder)
         {
             string data;
             while (true)
@@ -21,21 +21,21 @@ namespace RunningStrategies
                 {
                     Console.WriteLine("enter string to echo: ");
                     data = Console.ReadLine();
-                    client.Send(encoder.Encode(data));
+                    server.Send(encoder.Encode(data));
 
-                    data = decoder.Decode(client.Receive());
+                    data = decoder.Decode(server.Receive());
                     Console.WriteLine($"received data:{data}");
                     if (data.Equals("end"))
                     {
-                        Console.WriteLine("closing program");
-                        client.Close();
+                        Console.WriteLine("");
+                        server.Close();
                         break;
                     }
-                    client.Send(encoder.Encode(data));
+                    server.Send(encoder.Encode(data));
                 }
                 catch (Exception)
                 {
-                    client.Close();
+                    server.Close();
                     break;
                 }
             }
