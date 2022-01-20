@@ -25,6 +25,11 @@ namespace Server
 
         }
 
+        public void Connect()
+        {
+
+        }
+
         public void Close()
         {
             _communicator.Close();
