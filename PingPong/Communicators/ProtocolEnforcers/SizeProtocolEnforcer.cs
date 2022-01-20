@@ -2,15 +2,12 @@
 using Communicators.ProtocolEnforcers.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Communicators.ProtocolEnforcers
 {
-    class SizeProtocolEnforcer : ProtocolEnforcer
+    public class SizeProtocolEnforcer : ProtocolEnforcer
     {
         private readonly IEncoder<string> _encoder;
         private readonly IDecoder<string> _decoder;

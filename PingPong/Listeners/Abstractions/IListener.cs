@@ -1,10 +1,10 @@
-﻿using Communicators.Abstractions;
+﻿using Communicators.ProtocolEnforcers.Abstractions;
 
 namespace Listeners.Abstractions
 {
     public interface IListener
     {
-        public ICommunicator Listen();
+        public ProtocolEnforcer Listen();
 
         public void Close();
     }
