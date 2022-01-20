@@ -6,7 +6,7 @@ namespace DataHandlers.Decoders
     {
         public string Decode(byte[] info)
         {
-            return System.Text.Encoding.Default.GetString(info);
+            return System.Text.Encoding.UTF8.GetString(info);
         }
     }
 }

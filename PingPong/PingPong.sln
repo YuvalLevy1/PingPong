@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Communicators", "Communicat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Listeners", "Listeners\Listeners.csproj", "{161D0520-9E64-4D7E-BF85-281BB83B6590}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{D5650149-832E-4E98-A07A-B492AA0EB757}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{D5650149-832E-4E98-A07A-B492AA0EB757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProtocolEnforcerFactories", "ProtocolEnforcerFactories\ProtocolEnforcerFactories.csproj", "{6610D5F7-22EA-45D4-9C4C-7F2D5511963E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D5650149-832E-4E98-A07A-B492AA0EB757}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D5650149-832E-4E98-A07A-B492AA0EB757}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D5650149-832E-4E98-A07A-B492AA0EB757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6610D5F7-22EA-45D4-9C4C-7F2D5511963E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6610D5F7-22EA-45D4-9C4C-7F2D5511963E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6610D5F7-22EA-45D4-9C4C-7F2D5511963E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6610D5F7-22EA-45D4-9C4C-7F2D5511963E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
