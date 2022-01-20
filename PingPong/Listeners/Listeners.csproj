@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Communicators\Communicators.csproj" />
+    <ProjectReference Include="..\ProtocolEnforcerFactories\ProtocolEnforcerFactories.csproj" />
   </ItemGroup>
 
 </Project>
