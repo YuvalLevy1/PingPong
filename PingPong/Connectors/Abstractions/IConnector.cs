@@ -1,15 +1,11 @@
 ﻿using Communicators.ProtocolEnforcers.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using ProtocolEnforcerFactories.Abstractions;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Connectors.Abstractions
 {
-    interface IConnector
+    public interface IConnector
     {
-        public IProtocolEnforcer Connect(IPAddress address, int port);
+        public IProtocolEnforcer Connect(IPAddress address, int port, IProtocolEnforcerFactory factory);
     }
 }
