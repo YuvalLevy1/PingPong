@@ -16,16 +16,8 @@ namespace Communicators
 
         public byte[] Receive(int size)
         {
-            List<byte> output = new List<byte>();
-            byte[] buffer = new byte[1024];
-            while (output.Count < size)
-            {
-                int sizeOfData = _socket.Receive(buffer);
-                for (int i = 0; i < sizeOfData; i++)
-                {
-                    output.Add(buffer[i]);
-                }
-            }
+            byte[] buffer = new byte[size];
+            _socket.Receive(buffer);
             return buffer;
         }
 

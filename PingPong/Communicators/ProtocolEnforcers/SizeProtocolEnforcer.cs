@@ -12,7 +12,7 @@ namespace Communicators.ProtocolEnforcers
 {
     class SizeProtocolEnforcer : ProtocolEnforcer
     {
-        public SizeProtocolEnforcer(ICommunicator communicator, IEncoder<string> encoder, IDecoder<string> decoder) 
+        public SizeProtocolEnforcer(ICommunicator communicator, IEncoder<string> encoder, IDecoder<string> decoder)
             : base(communicator, encoder, decoder)
         {
 
@@ -25,7 +25,8 @@ namespace Communicators.ProtocolEnforcers
 
         public override void Send(byte[] info)
         {
-            throw new NotImplementedException();
+            _communicator.Send(_encoder.Encode($"{info.Length}"));
+            _communicator.Send(info);
         }
     }
 }
