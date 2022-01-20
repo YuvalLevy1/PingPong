@@ -16,19 +16,28 @@ namespace ClientHandelingStrategies
             byte[] encodedData;
             while (true)
             {
-                data = decoder.Decode(client.Receive(4));
-                data = decoder.Decode(client.Receive(int.Parse(data)));
-                Console.WriteLine($"data received: {data}");
-                if (data == "end")
+                try
                 {
-                    client.Send(encoder.Encode("end"));
-                    client.Close();
+                    data = decoder.Decode(client.Receive(4));
+                    data = decoder.Decode(client.Receive(int.Parse(data)));
+                    Console.WriteLine($"data received: {data}");
+                    if (data == "end")
+                    {
+                        client.Send(encoder.Encode("end"));
+                        clients.Remove(client);
+                        client.Close();
+                        break;
+                    }
+                    encodedData = encoder.Encode(data);
+                    client.Send(encoder.Encode($"{encodedData.Length}"));
+                    client.Send(encodedData);
+                }
+                catch (Exception)
+                {
                     clients.Remove(client);
+                    client.Close();
                     break;
                 }
-                encodedData = encoder.Encode(data);
-                client.Send(encoder.Encode($"{encodedData.Length}"));
-                client.Send(encodedData);
             }
         }
     }
