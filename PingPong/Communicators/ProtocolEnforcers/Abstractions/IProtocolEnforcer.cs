@@ -2,11 +2,11 @@
 
 namespace Communicators.ProtocolEnforcers.Abstractions
 {
-    public abstract class ProtocolEnforcer
+    public abstract class IProtocolEnforcer
     {
         protected readonly ICommunicator _communicator;
 
-        protected ProtocolEnforcer(ICommunicator communicator)
+        protected IProtocolEnforcer(ICommunicator communicator)
         {
             _communicator = communicator;
         }
