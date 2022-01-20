@@ -1,14 +1,11 @@
 ﻿using Communicators.Abstractions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataHandlers.Decoders.Abstractions;
+using DataHandlers.Encoders.Abstractions;
 
 namespace ClientHandelingStrategies.Abstractions
 {
-    public interface IClientHandelingStrategy
+    public interface IClientHandelingStrategy<T>
     {
-        public void Run(ICommunicator client);
+        public void Run(ICommunicator client, IEncoder<T> encoder, IDecoder<T> decoder);
     }
 }

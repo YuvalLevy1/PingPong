@@ -1,5 +1,6 @@
 ﻿using Communicators.Abstractions;
 using Listeners.Abstractions;
+using System.Collections.Generic;
 
 namespace Server
 {
@@ -7,6 +8,7 @@ namespace Server
     {
         private IListener _listener;
         private bool _running;
+        private List<ICommunicator> clients;
 
         public Server(IListener listener)
         {
@@ -19,10 +21,19 @@ namespace Server
             return _listener.Listen();
         }
 
+        public void Start()
+        {
+
+        }
+
         public void Close()
         {
             _listener.Close();
             _running = false;
+            foreach (var client in clients)
+            {
+                client.Close();
+            }
         }
     }
 }
