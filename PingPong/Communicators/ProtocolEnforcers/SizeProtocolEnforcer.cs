@@ -20,13 +20,37 @@ namespace Communicators.ProtocolEnforcers
 
         public override byte[] Receive()
         {
-            throw new NotImplementedException();
+            List<byte> data = new List<byte>();
+            byte[] buffer;
+            var length = int.Parse(_decoder.Decode(_communicator.Receive(4)));
+            while (data.Count < length)
+            {
+                buffer = _communicator.Receive(1024);
+                data.AddRange(buffer);
+            }
+            return data.ToArray();
         }
 
         public override void Send(byte[] info)
         {
+            byte[][] slicedInfo = ArraySlicer(info, 1024);
             _communicator.Send(_encoder.Encode($"{info.Length}"));
-            _communicator.Send(info);
+            for (int i = 0; i < slicedInfo.Length; i++)
+            {
+                _communicator.Send(slicedInfo[i]);
+            }
+        }
+
+        private byte[][] ArraySlicer(byte[] info, int sizeOfPacket)
+        {
+            byte[][] slicedInfo = new byte[info.Length / sizeOfPacket][];
+            for (int i = 0; i < slicedInfo.Length; i++)
+            {
+                var buffer = info.Take(sizeOfPacket).ToArray();
+                slicedInfo[i] = buffer;
+                info.CopyTo(info, i * sizeOfPacket);
+            }
+            return slicedInfo;
         }
     }
 }

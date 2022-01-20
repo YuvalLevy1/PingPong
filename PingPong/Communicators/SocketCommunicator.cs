@@ -25,6 +25,7 @@ namespace Communicators
         {
             _socket.Send(infoToSend);
         }
+
         public void Close()
         {
             _socket.Close();
