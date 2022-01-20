@@ -5,4 +5,17 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Server\Server.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DataHandlers">
+      <HintPath>..\..\PingPong\DataHandlers\bin\Debug\net5.0\DataHandlers.dll</HintPath>
+    </Reference>
+    <Reference Include="Listeners">
+      <HintPath>..\..\PingPong\Listeners\bin\Debug\net5.0\Listeners.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

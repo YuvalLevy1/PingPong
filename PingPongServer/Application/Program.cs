@@ -1,12 +1,11 @@
-﻿using System;
-
+﻿
 namespace Application
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var server = new EchoServerBootstrapper().GetServer(int.Parse(args[0]));
+            var server = new EchoServerBootstrapper().GetServer(7070);
             server.Start();
         }
     }
