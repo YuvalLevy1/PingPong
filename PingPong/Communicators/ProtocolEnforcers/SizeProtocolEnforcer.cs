@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Communicators.ProtocolEnforcers
 {
-    public class SizeProtocolEnforcer : ProtocolEnforcer
+    public class SizeProtocolEnforcer : IProtocolEnforcer
     {
         private readonly IEncoder<string> _encoder;
         private readonly IDecoder<string> _decoder;
