@@ -14,5 +14,7 @@ namespace Communicators.ProtocolEnforcers.Abstractions
         public abstract void Send(byte[] info);
         
         public abstract byte[] Receive();
+
+        public abstract void Close();
     }
 }

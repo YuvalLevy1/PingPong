@@ -7,7 +7,7 @@ using ProtocolEnforcerFactories.Abstractions;
 
 namespace ProtocolEnforcerFactories
 {
-    class SizeProtocolFactory : IProtocolEnforcerFactory
+    public class SizeProtocolFactory : IProtocolEnforcerFactory
     {
         public readonly int BufferSize;
         public readonly int LengthSize;

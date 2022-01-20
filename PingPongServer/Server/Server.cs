@@ -1,5 +1,6 @@
 ﻿using ClientHandelingStrategies.Abstractions;
 using Communicators.Abstractions;
+using Communicators.ProtocolEnforcers.Abstractions;
 using DataHandlers.Decoders.Abstractions;
 using DataHandlers.Encoders.Abstractions;
 using Listeners.Abstractions;
@@ -13,21 +14,26 @@ namespace Server
         private bool _running;
         private readonly IListener _listener;
         private readonly IClientHandelingStrategy<T> _strategy;
-        private ConcurrentHashSet<ICommunicator> _clients;
+        private ConcurrentHashSet<IProtocolEnforcer> _clients;
         private IEncoder<T> _encoder;
         private IDecoder<T> _decoder;
 
-        public Server(IListener listener, IClientHandelingStrategy<T> strategy, IEncoder<T> encoder, IDecoder<T> decoder)
+        public Server(
+            IListener listener,
+            IClientHandelingStrategy<T> strategy,
+            IEncoder<T> encoder,
+            IDecoder<T> decoder,
+            ConcurrentHashSet<IProtocolEnforcer> clients)
         {
             _listener = listener;
             _strategy = strategy;
             _encoder = encoder;
             _decoder = decoder;
             _running = false;
-            _clients = new ConcurrentHashSet<ICommunicator>();
+            _clients = clients;
         }
 
-        private ICommunicator Listen()
+        private  IProtocolEnforcer Listen()
         {
             return _listener.Listen();
         }

@@ -28,6 +28,12 @@ namespace Communicators.ProtocolEnforcers
             _sizeOfBuffer = sizeOfBuffer;
         }
 
+        public override void Close()
+        {
+            Send(_encoder.Encode("end"));
+            _communicator.Close();
+        }
+
         public override byte[] Receive()
         {
             List<byte> data = new List<byte>();
